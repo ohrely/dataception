@@ -7,6 +7,12 @@ For fun and practice.
 
 # Stringception
 
+paradox = "a dream within a dream"
+
+within = paradox.join(paradox.split("a dream"))
+
+print within
+
 # Listception
 
 # Tupception
