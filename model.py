@@ -15,6 +15,36 @@ class Player(db.Model):
         return "<Player name={}>".format(self.name)
 
 
+class Level(db.Model):
+    """Information about each level of the dream.
+    """
+    __tablename__ = "levels"
+
+    level_num = db.Column(db.Integer, primary_key=True)
+    level_name = db.Column(db.String(24))
+    dreamer = db.Column(db.String(24), db.ForeignKey('players.name'))
+
+    dreamer_rel = db.relationship('Player', foreign_keys='Level.dreamer')
+
+    def __repr__(self):
+
+        return "<Level level_name={} dreamer={}>".format(self.level_name, self.dreamer)
+
+
+class PlayerLevel(db.Model):
+    """Relational table to track players' level of depth in dreams.
+    """
+    __tablename__ = "playerlevels"
+
+    tracker = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    level_num = db.Column(db.Integer, db.ForeignKey('levels.level_num'))
+    player = db.Column(db.String(24), db.ForeignKey('players.name'))
+
+    def __repr__(self):
+
+        return "<Level level_num={} player={}>".format(self.level_num, self.player)
+
+
 def connect_to_db(app):
     """Connect the database to the Flask app"""
 
