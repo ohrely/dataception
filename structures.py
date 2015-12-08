@@ -4,9 +4,10 @@ For fun and practice.
 """
 
 # Intception
-code = 528491
+dream = 528
+team = 491
 
-print code
+print dream, team
 
 
 # Stringception
@@ -30,7 +31,10 @@ print plot
 
 
 # Dictception
-
+# create a dictionary of dictionaries.
+# each team member is a key in the base dict.
+# at each level, the dreamer's value is a dict of the team members on that level.
+# build recursively?
 
 
 # Graphception
@@ -42,6 +46,8 @@ print plot
 
 
 # Stackception
+# dreamers' experience of dream order.
+# some variable better be named non_rien_nest_rien.
 
 
 
@@ -50,3 +56,5 @@ print plot
 
 
 # Linkception
+# doubly-linked list of dream order.
+# why doubly linked?  because dreamers have to kick back out of the dreams in order.
