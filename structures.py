@@ -57,26 +57,48 @@ def setception():
     """
     pass
 
-# Dictception
-# create a dictionary of dictionaries.
-# each team member is a key in the base dict.
-# at each level, the dreamer's value is a dict of the team members on that level.
-# build recursively?
 
-# Graphception
-# map who knows who - will need another association table.
+def dictception():
+    """
+    # create a dictionary of dictionaries.
+    # each team member is a key in the base dict.
+    # at each level, the dreamer's value is a dict of the team members on that level.
+    # build recursively?
+    """
+    pass
 
-# Treeception
 
-# Stackception
-# dreamers' experience of dream order.
-# some variable better be named non_rien_nest_rien.
+def graphception():
+    """map who knows who - will need another association table.
+    """
+    pass
 
-# Queueception
 
-# Linkception
-# doubly-linked list of dream order.
-# why doubly linked?  because dreamers have to kick back out of the dreams in order.
+def treeception():
+
+    pass
+
+
+def stackception():
+    """Dreamers' experience of dream order.
+
+    some variable better be named non_rien_nest_rien.
+    """
+    pass
+
+
+def queueception():
+
+    pass
+
+
+def linkception():
+    """Doubly-linked list of dream order.
+
+    why doubly linked?  because dreamers have to kick back out of the dreams in order.
+    """
+    pass
+
 
 if __name__ == "__main__":
     from server import app
