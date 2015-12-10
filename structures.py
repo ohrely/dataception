@@ -9,6 +9,10 @@ import doctest
 
 
 def intception():
+    """
+    >>> intception()
+    528 491
+    """
     dream = 528
     team = 491
 
@@ -16,6 +20,10 @@ def intception():
 
 
 def stringception():
+    """
+    >>> stringception()
+    a dream within a dream within a dream within a dream
+    """
     paradox = "a dream within a dream"
 
     plot = paradox.join(paradox.split("a dream"))
@@ -24,7 +32,7 @@ def stringception():
 
 
 def listception(level):
-    """creates a list of the team members at the given level.
+    """Creates a list of the team members at the given level.
 
     >>> listception(1)
     [u'Ariadne', u'Arthur', u'Dom', u'Eames', u'Fischer', u'Saito', u'Yusuf']
@@ -39,11 +47,15 @@ def listception(level):
     print level_list
 
 
-# Tupception
+def tupception():
+
+    pass
 
 
-# Setception
-# do set math with listception.
+def setception():
+    """Do set math with listception.
+    """
+    pass
 
 # Dictception
 # create a dictionary of dictionaries.
