@@ -48,12 +48,19 @@ def listception(level):
 
 
 def tupception():
+    """
+    >>> tupception()
+
+    """
 
     pass
 
 
 def setception():
     """Do set math with listception.
+
+    >>> setception()
+
     """
     pass
 
@@ -64,30 +71,48 @@ def dictception():
     # each team member is a key in the base dict.
     # at each level, the dreamer's value is a dict of the team members on that level.
     # build recursively?
+
+    >>> dictception()
+
     """
     pass
 
 
 def graphception():
     """map who knows who - will need another association table.
+
+    >>> graphception()
+
     """
     pass
 
 
 def treeception():
+    """
+
+    >>> treeception()
+
+    """
 
     pass
 
 
-def stackception():
+def stackception(dreamer):
     """Dreamers' experience of dream order.
 
     some variable better be named non_rien_nest_rien.
+
+    >>> stackception("Arthur")
+
     """
     pass
 
 
 def queueception():
+    """
+    >>> queueception()
+
+    """
 
     pass
 
@@ -96,8 +121,13 @@ def linkception():
     """Doubly-linked list of dream order.
 
     why doubly linked?  because dreamers have to kick back out of the dreams in order.
+
+    >>> linkception()
+
     """
-    pass
+    dreams = None
+
+    return dreams
 
 
 if __name__ == "__main__":
