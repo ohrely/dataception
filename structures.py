@@ -21,6 +21,7 @@ def intception():
 
 def stringception():
     """
+
     >>> stringception()
     a dream within a dream within a dream within a dream
     """
@@ -49,11 +50,14 @@ def listception(level):
 
 def tupception():
     """
-    >>> tupception()
 
+    >>> tupception()
+    [(0, u'Reality'), (1, u'Warehouse'), (2, u'Hotel'), (3, u'Fortress'), (4, u'Limbo')]
     """
 
-    pass
+    level_tups = db.session.query(Level.level_num, Level.level_name).all()
+
+    return level_tups
 
 
 def setception():
@@ -66,8 +70,8 @@ def setception():
 
 
 def dictception():
-    """
-    # create a dictionary of dictionaries.
+    """Nested dictionary model of dream(ers) within a dream(er).
+
     # each team member is a key in the base dict.
     # at each level, the dreamer's value is a dict of the team members on that level.
     # build recursively?
@@ -75,7 +79,11 @@ def dictception():
     >>> dictception()
 
     """
-    pass
+    real_world = {}
+
+
+
+    print real_world
 
 
 def graphception():
