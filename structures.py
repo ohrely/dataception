@@ -16,20 +16,20 @@ def intception():
     dream = 528
     team = 491
 
-    print dream, team
+    return dream, team
 
 
 def stringception():
     """
 
     >>> stringception()
-    a dream within a dream within a dream within a dream
+    'a dream within a dream within a dream within a dream'
     """
     paradox = "a dream within a dream"
 
     plot = paradox.join(paradox.split("a dream"))
 
-    print plot
+    return plot
 
 
 def listception(level):
@@ -45,31 +45,36 @@ def listception(level):
     for player in level_players:
         level_list.append(player[0])
 
-    print level_list
+    return level_list
 
 
 def tupception():
-    """
+    """DB query of levels - useful for more complex structures.
 
     >>> tupception()
-    [(0, u'Reality'), (1, u'Warehouse'), (2, u'Hotel'), (3, u'Fortress'), (4, u'Limbo')]
+    [(0, u'Reality', u''), (1, u'Warehouse', u'Yusuf'), (2, u'Hotel', u'Arthur'), (3, u'Fortress', u'Eames'), (4, u'Limbo', u'')]
     """
 
-    level_tups = db.session.query(Level.level_num, Level.level_name).all()
+    level_tups = db.session.query(Level.level_num, Level.level_name, Level.dreamer).all()
 
     return level_tups
 
 
-def setception():
-    """Do set math with listception.
+def setception(level):
+    """Use set math with listception to find which players stop at a level.
 
-    >>> setception()
-
+    >>> setception(2)
+    set([u'Arthur'])
     """
-    pass
+    this_level = set(listception(level))
+    next_level = set(listception(level + 1))
+
+    stays_behind = this_level.difference(next_level)
+
+    return stays_behind
 
 
-def dictception():
+def dictception(mind_dict=None):
     """Nested dictionary model of dream(ers) within a dream(er).
 
     # each team member is a key in the base dict.
@@ -79,11 +84,19 @@ def dictception():
     >>> dictception()
 
     """
-    real_world = {}
+    if not mind_dict:
+        mind_dict = {}
 
+    if not levels:
+        levels = tupception()
 
+    if len(levels) > 0:
+        this_level = levels[0]
 
-    print real_world
+        level_num = this_level[0]
+        level_dreamer = this_level[2]
+
+    return mind_dict
 
 
 def graphception():
