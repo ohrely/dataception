@@ -9,7 +9,8 @@ import doctest
 
 
 def intception():
-    """
+    """Prints sequence of numbers from the film.
+
     >>> intception()
     528 491
     """
@@ -20,7 +21,7 @@ def intception():
 
 
 def stringception():
-    """
+    """Fun with .join() and .split()
 
     >>> stringception()
     'a dream within a dream within a dream within a dream'
@@ -55,7 +56,7 @@ def tupception():
     [(0, u'Reality', u''), (1, u'Warehouse', u'Yusuf'), (2, u'Hotel', u'Arthur'), (3, u'Fortress', u'Eames'), (4, u'Limbo', u'')]
     """
 
-    level_tups = db.session.query(Level.level_num, Level.level_name, Level.dreamer).all()
+    level_tups = db.session.query(Level.level_num, Level.level_name, Level.dreamer).order_by(Level.level_num).all()
 
     return level_tups
 
@@ -74,7 +75,7 @@ def setception(level):
     return stays_behind
 
 
-def dictception(mind_dict=None):
+def dictception(mind_dict=None, levels=None):
     """Nested dictionary model of dream(ers) within a dream(er).
 
     # each team member is a key in the base dict.
@@ -84,17 +85,31 @@ def dictception(mind_dict=None):
     >>> dictception()
 
     """
+    # setup
     if not mind_dict:
         mind_dict = {}
 
     if not levels:
         levels = tupception()
 
-    if len(levels) > 0:
+    # base case
+    if len(levels) == 1:
+        pass
+
+    # recursive call
+    if len(levels) > 1:
         this_level = levels[0]
+        next_level = levels[1]
 
         level_num = this_level[0]
-        level_dreamer = this_level[2]
+        dreamer = next_level[2]
+
+        for player in listception(level_num):
+            mind_dict[player] = None
+
+        mind_dict[dreamer] = {}
+
+        print mind_dict
 
     return mind_dict
 
