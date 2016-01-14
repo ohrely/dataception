@@ -50,7 +50,7 @@ def listception(level):
 
 
 def tupception():
-    """DB query of levels - useful for more complex structures.
+    """DB query of levels.
 
     >>> tupception()
     [(0, u'Reality', u''), (1, u'Warehouse', u'Yusuf'), (2, u'Hotel', u'Arthur'), (3, u'Fortress', u'Eames'), (4, u'Limbo', u'')]
@@ -59,6 +59,24 @@ def tupception():
     level_tups = db.session.query(Level.level_num, Level.level_name, Level.dreamer).order_by(Level.level_num).all()
 
     return level_tups
+
+
+class LevelObj(object):
+    """More modular alternative to tupception."""
+
+    def __init__(self, level_num):
+        self.level_num = level_num
+        self.get_attributes()
+        self.get_players()
+
+    def get_attributes(self):
+        self.level_name, self.dreamer = db.session.query(Level.level_name, Level.dreamer).filter(Level.level_num == self.level_num).one()
+
+    def get_players(self):
+        self.players_list = listception(self.level_num)
+
+    def __repr__(self):
+        return "<LevelObj level_num={} level_name={}>".format(self.level_num, self.level_name)
 
 
 def setception(level):
@@ -87,7 +105,7 @@ def dictception(mind_dict=None, levels=None):
     """
     # setup
     if not mind_dict:
-        mind_dict = {} 
+        mind_dict = {}
 
     if not levels:
         levels = tupception()
@@ -123,6 +141,23 @@ def graphception():
     pass
 
 
+class PlayerObj(object):
+    """"""
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return "PlayerObj name={}".format(self.name)
+
+
+class DreamerObj(PlayerObj):
+    """Sub-class of PlayerObj for working just with characters who dream."""
+
+    def __init__(self):
+        # TODO: look up __init__ collisions
+        pass
+
+
 def treeception():
     """Tree of player participation in each others' minds.
 
@@ -153,22 +188,6 @@ def queueception():
     pass
 
 
-class DoubLink(object):
-    """Layer links in the doubly-linked list."""
-
-    def __init__(self, level_num):
-        self.level_num = level_num
-        self.up = None
-        self.down = None
-        self.get_attributes()
-
-    def get_attributes(self):
-        self.level_name, self.dreamer = db.session.query(Level.level_name, Level.dreamer).filter(Level.level_num == self.level_num).one()
-
-    def __repr__(self):
-        return "<DoubLink level_num={} level_name={}>".format(self.level_num, self.level_name)
-
-
 class DoubLinkCeption(object):
     """Doubly-linked layer list."""
 
@@ -176,17 +195,17 @@ class DoubLinkCeption(object):
         pass
 
 
-# def linkception():
-#     """Given dream layer, returns list of layers that lead to it.  Doubly-linked list of dream order.
+def linkception():
+    """Given dream layer, returns list of layers that lead to it.  Doubly-linked list of dream order.
 
-#     why doubly linked?  because dreamers have to kick back out of the dreams in order.
+    why doubly linked?  because dreamers have to kick back out of the dreams in order.
 
-#     >>> linkception()
+    >>> linkception()
 
-#     """
-#     dreams = None
+    """
+    dreams = None
 
-#     return dreams
+    return dreams
 
 
 if __name__ == "__main__":
