@@ -87,7 +87,7 @@ def dictception(mind_dict=None, levels=None):
     """
     # setup
     if not mind_dict:
-        mind_dict = {}
+        mind_dict = {} 
 
     if not levels:
         levels = tupception()
@@ -124,7 +124,7 @@ def graphception():
 
 
 def treeception():
-    """
+    """Tree of player participation in each others' minds.
 
     >>> treeception()
 
@@ -153,17 +153,40 @@ def queueception():
     pass
 
 
-def linkception():
-    """Doubly-linked list of dream order.
+class DoubLink(object):
+    """Layer links in the doubly-linked list."""
 
-    why doubly linked?  because dreamers have to kick back out of the dreams in order.
+    def __init__(self, level_num):
+        self.level_num = level_num
+        self.up = None
+        self.down = None
+        self.get_attributes()
 
-    >>> linkception()
+    def get_attributes(self):
+        self.level_name, self.dreamer = db.session.query(Level.level_name, Level.dreamer).filter(Level.level_num == self.level_num).one()
 
-    """
-    dreams = None
+    def __repr__(self):
+        return "<DoubLink level_num={} level_name={}>".format(self.level_num, self.level_name)
 
-    return dreams
+
+class DoubLinkCeption(object):
+    """Doubly-linked layer list."""
+
+    def __init__(self):
+        pass
+
+
+# def linkception():
+#     """Given dream layer, returns list of layers that lead to it.  Doubly-linked list of dream order.
+
+#     why doubly linked?  because dreamers have to kick back out of the dreams in order.
+
+#     >>> linkception()
+
+#     """
+#     dreams = None
+
+#     return dreams
 
 
 if __name__ == "__main__":
