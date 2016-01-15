@@ -93,7 +93,7 @@ def setception(level):
     return stays_behind
 
 
-def dictception(mind_dict=None, levels=None):
+def dictception(level=0, max_level=5, mind_dict=None):
     """Nested dictionary model of dream(ers) within a dream(er).
 
     # each team member is a key in the base dict.
@@ -103,31 +103,24 @@ def dictception(mind_dict=None, levels=None):
     >>> dictception()
 
     """
+    print level
+    print mind_dict
+
     # setup
     if not mind_dict:
         mind_dict = {}
 
-    if not levels:
-        levels = tupception()
-
     # base case
-    if len(levels) == 1:
-        pass
-
+    if level == max_level:
+        return mind_dict
     # recursive call
-    if len(levels) > 1:
-        this_level = levels[0]
-        next_level = levels[1]
-
-        level_num = this_level[0]
-        dreamer = next_level[2]
-
-        for player in listception(level_num):
+    elif level < max_level:
+        for player in listception(level):
             mind_dict[player] = None
 
-        mind_dict[dreamer] = {}
+        level += 1
 
-        print mind_dict
+        mind_dict[dreamer] = dictception(level)
 
     return mind_dict
 
