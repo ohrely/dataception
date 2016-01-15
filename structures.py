@@ -93,14 +93,36 @@ def setception(level):
     return stays_behind
 
 
-def dictception(level=0, max_level=5, mind_dict=None):
+def queryception():
+    """Query db for level numbers."""
+    all_level_nums = db.session.query(Level.level_num).all()
+    return all_level_nums
+
+
+def dictception():
+    """Create dictionary of all LevelObj objects.
+
+    >>> dictception()
+    {0: <LevelObj level_num=0 level_name=Reality>, 1: <LevelObj level_num=1 level_name=Warehouse>, 2: <LevelObj level_num=2 level_name=Hotel>, 3: <LevelObj level_num=3 level_name=Fortress>, 4: <LevelObj level_num=4 level_name=Limbo>}
+    """
+    all_levels = queryception()
+
+    level_dict = {}
+    for num in all_levels:
+        level_key = num[0]
+        level_dict[level_key] = LevelObj(level_key)
+
+    return level_dict
+
+
+def nesteddictception(level=0, level_dict=None, max_level=5, mind_dict=None):
     """Nested dictionary model of dream(ers) within a dream(er).
 
     # each team member is a key in the base dict.
     # at each level, the dreamer's value is a dict of the team members on that level.
     # build recursively?
 
-    >>> dictception()
+    >>> nesteddictception()
 
     """
     print level
@@ -110,6 +132,9 @@ def dictception(level=0, max_level=5, mind_dict=None):
     if not mind_dict:
         mind_dict = {}
 
+    if not level_dict:
+        level_dict = dictception()
+
     # base case
     if level == max_level:
         return mind_dict
@@ -118,9 +143,10 @@ def dictception(level=0, max_level=5, mind_dict=None):
         for player in listception(level):
             mind_dict[player] = None
 
+        dreamer = level_dict[level].dreamer
         level += 1
 
-        mind_dict[dreamer] = dictception(level)
+        mind_dict[dreamer] = dictception(level, level_dict)
 
     return mind_dict
 
