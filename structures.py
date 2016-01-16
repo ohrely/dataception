@@ -116,18 +116,16 @@ def dictception():
 
 
 def nesteddictception(level=0, level_dict=None, max_level=5, mind_dict=None):
-    """Nested dictionary model of dream(ers) within a dream(er).
+    """Nested dictionary model of dream(ers) within a dream(er), built with recursion.
 
-    # each team member is a key in the base dict.
-    # at each level, the dreamer's value is a dict of the team members on that level.
-    # build recursively?
+    Each team member is a key in the base dict.
+    At each level, the dreamer's value is a dict of the team members on that level.
+
+    TODO: Decide if limbo should somehow be included even though there isn't just one dreamer.
 
     >>> nesteddictception()
-
+    {u'Fischer': 0, u'Eames': 0, u'Dom': 0, u'Yusuf': {u'Fischer': 1, u'Eames': 1, u'Dom': 1, u'Yusuf': 1, u'Saito': 1, u'Arthur': {u'Fischer': 2, u'Eames': {u'Saito': 3, u'Fischer': 3, u'Ariadne': 3, u'Eames': 3, u'Dom': 3}, u'Dom': 2, u'Saito': 2, u'Arthur': 2, u'Ariadne': 2}, u'Ariadne': 1}, u'Browning': 0, u'Mal': 0, u'Arthur': 0, u'Nash': 0, u'Saito': 0, u'Ariadne': 0}
     """
-    print level
-    print mind_dict
-
     # setup
     if not mind_dict:
         mind_dict = {}
@@ -138,15 +136,18 @@ def nesteddictception(level=0, level_dict=None, max_level=5, mind_dict=None):
     # base case
     if level == max_level:
         return mind_dict
+
     # recursive call
     elif level < max_level:
         for player in listception(level):
-            mind_dict[player] = None
+            mind_dict[player] = level
 
-        dreamer = level_dict[level].dreamer
         level += 1
 
-        mind_dict[dreamer] = dictception(level, level_dict)
+        dreamer = level_dict[level].dreamer
+
+        if dreamer:
+            mind_dict[dreamer] = nesteddictception(level, level_dict)
 
     return mind_dict
 
